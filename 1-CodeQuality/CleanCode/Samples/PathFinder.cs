@@ -6,19 +6,21 @@ namespace CleanCode.Samples
 {
 	public class PathFinder
 	{
-		public static IMaze maze;
+	    private IMaze maze;
 
-		public static void GenerateRandomMaze()
+		public void GenerateRandomMaze()
 		{
 			// maze = ...
 		}
 
-		private static readonly Queue<Point> queue = new Queue<Point>();
-		private static readonly ISet<Point> used = new HashSet<Point>();
 
-		public static Point GetNextStepToTarget(Point source, Point target)
+		public Point GetNextStepToTarget(Point source, Point target)
 		{
-			queue.Clear();
+
+            var queue = new Queue<Point>();
+            var used = new HashSet<Point>();
+
+            queue.Clear();
 			used.Clear();
 			queue.Enqueue(target);
 			used.Add(target);
@@ -38,7 +40,7 @@ namespace CleanCode.Samples
 		}
 
 
-		private static IEnumerable<Point> GetNeighbours(Point from)
+		private IEnumerable<Point> GetNeighbours(Point from)
 		{
 			return new[] { new Size(1, 0), new Size(-1, 0), new Size(0, 1), new Size(0, -1) }
 				.Select(shift => from + shift)

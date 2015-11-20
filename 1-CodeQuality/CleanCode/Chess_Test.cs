@@ -16,11 +16,11 @@ namespace CleanCode
 				if (Path.GetExtension(file) != string.Empty) continue;
 				using (var f = File.OpenText(file))
 				{
-					Chess.LoadFrom(f);
+                    var chess = new Chess();
+					
 					Console.WriteLine("Loaded " + file);
 					var expectedAnswer = File.ReadAllText(file + ".ans").Trim();
-					Chess.SolveTask();
-					Assert.AreEqual(expectedAnswer, Chess.Result, "error in file " + file);
+					Assert.AreEqual(expectedAnswer, chess.GetStringForWhiteKing(f), "error in file " + file);
 				}
 				testsCount++;
 			}
