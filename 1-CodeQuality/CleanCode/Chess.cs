@@ -31,8 +31,12 @@ namespace CleanCode
         private string GetStrinForWhiteKingResult(bool isWhiteKingUnderAttack, bool whiteKingHasMoves)
         {
             if (isWhiteKingUnderAttack)
-                return whiteKingHasMoves ? "check" : "mate";
-            return whiteKingHasMoves ? "ok" : "stalemate";
+                if (whiteKingHasMoves)
+                    return "check";
+                else return "mate";
+            if (whiteKingHasMoves) return "ok";
+
+            return "stalemate";
         }
 
         private bool WhiteKingSafeMone()
