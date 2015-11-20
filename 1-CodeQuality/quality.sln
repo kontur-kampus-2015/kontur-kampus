@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patterns", "Patterns\Patter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challenge", "Challenge\Challenge.csproj", "{02DDE0D7-AC43-4718-9396-1BA68EA42C63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bowling", "Bowling\Bowling.csproj", "{94A48902-3212-40F5-AAAC-140BB1E2A5A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,18 @@ Global
 		{02DDE0D7-AC43-4718-9396-1BA68EA42C63}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{02DDE0D7-AC43-4718-9396-1BA68EA42C63}.Release|x86.ActiveCfg = Release|Any CPU
 		{02DDE0D7-AC43-4718-9396-1BA68EA42C63}.Release|x86.Build.0 = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Debug|x86.Build.0 = Debug|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{94A48902-3212-40F5-AAAC-140BB1E2A5A3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
