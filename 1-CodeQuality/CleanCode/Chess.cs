@@ -1,59 +1,66 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace CleanCode
 {
-	public class Chess
-	{
-		private static Board board;
-		public static string Result;
+    public class Chess
+    {
+        private Board _board;
 
-		public static void LoadFrom(StreamReader reader)
-		{
-			board = new Board(reader);
-		}
 
-		// Определяет мат, шах или пат белым.
-		public static void SolveTask()
-		{
-			var isCheck = IsBad();
-			var hasMoves = false;
-			foreach (Location locFrom in board.GetPieces(PieceColor.White))
-			{
-				foreach (Location locTo in board.Get(locFrom).Piece.GetMoves(locFrom, board))
-				{
-					var old = board.Get(locTo);
-					board.Set(locTo, board.Get(locFrom));
-					board.Set(locFrom, CellContent.Empty);
-					if (!IsBad())
-						hasMoves = true;
-					board.Set(locFrom, board.Get(locTo));
-					board.Set(locTo, old);
-				}
-			}
-			if (isCheck)
-				if (hasMoves)
-					Result = "check";
-				else Result = "mate";
-			else 
-				if (hasMoves) Result = "ok";
-				else Result = "stalemate";
-		}
+        // Определяет мат, шах или пат белым.
+        public string GetStringForWhiteKing(StreamReader reader)
+        {
+            _board = new Board(reader);
 
-		private static bool IsBad()
-		{
-			bool isCheck = false;
-			foreach (var loc in board.GetPieces(PieceColor.Black))
-			{
-				var cell = board.Get(loc);
-				var moves = cell.Piece.GetMoves(loc, board);
-				foreach (var destination in moves)
-				{
-					if (board.Get(destination).Is(PieceColor.White, Piece.King))
-						isCheck = true;
-				}
-			}
-			if (isCheck) return true;
-			return false;
-		}
-	}
+            var isWhiteKingUnderAttack = IsWhiteKingUnderAttack();
+            var whiteKingHasMoves = WhiteKingSafeMone();
+            return GetStrinForWhiteKingResult(isWhiteKingUnderAttack, whiteKingHasMoves);
+        }
+
+        private bool IsWhiteKingUnderAttack()
+        {
+            return (
+                from location in _board.GetPieces(PieceColor.Black)
+                let locationBlack = _board.Get(location)
+                select locationBlack.Piece.GetMoves(location, _board))
+                .Any(movesBlack => movesBlack.Any(destination => _board.Get(destination)
+                    .Is(PieceColor.White, Piece.King)));
+        }
+
+        private string GetStrinForWhiteKingResult(bool isWhiteKingUnderAttack, bool whiteKingHasMoves)
+        {
+            if (isWhiteKingUnderAttack)
+                if (whiteKingHasMoves)
+                    return "check";
+                else return "mate";
+            if (whiteKingHasMoves) return "ok";
+
+            return "stalemate";
+        }
+
+        private bool WhiteKingSafeMone()
+        {
+            var whiteKingHasMoves = false;
+            foreach (var whitePiece in _board.GetPieces(PieceColor.White))
+            {
+                var locationWhiteKing = _board.Get(whitePiece);
+
+                foreach (var whitePieceCanMove in locationWhiteKing.Piece.GetMoves(whitePiece, _board))
+                {
+                    var possibleMovesWhitePiece = _board.Get(whitePieceCanMove);
+
+                    var cellWhitePiece = _board.Get(whitePiece);
+
+                    _board.Set(whitePieceCanMove, cellWhitePiece);
+                    _board.Set(whitePiece, CellContent.Empty);
+                    if (!IsWhiteKingUnderAttack())
+                        whiteKingHasMoves = true;
+                    _board.Set(whitePiece, _board.Get(whitePieceCanMove));
+                    _board.Set(whitePieceCanMove, possibleMovesWhitePiece);
+                }
+            }
+            return whiteKingHasMoves;
+        }
+    }
 }
